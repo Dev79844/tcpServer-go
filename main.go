@@ -22,10 +22,12 @@ func main(){
 	if err!=nil{
 		log.Fatal(err)
 	}
-	conn,err := listener.Accept() // waits until the client gets connected, blocking call
-	if err!= nil{
-		log.Fatal(err)
+	for{
+		conn,err := listener.Accept() // waits until the client gets connected, blocking call
+		if err!= nil{
+			log.Fatal(err)
+		}
+		
+		go do(conn) // adding multithreading
 	}
-	
-	do(conn)
 }
